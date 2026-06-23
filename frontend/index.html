@@ -4,34 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aavula Tejaswi - Portfolio</title>
+    <link rel="icon" type="image/png" href="./portfolio favicon image.png">
     <link rel="stylesheet" href="./practice.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
-    <header style="padding-left: 80px;padding-right: 80px;">
-       <h1>Aavula Tejaswi</h1>
-        <dl>
-            <dd><a href="#home">Home</a></dd>
-            <dd><a href="#about">About</a></dd>
-            <dd><a href="#skills">Skills</a></dd>
-            <dd><a href="#education">Education</a></dd>
-            <dd><a href="#projects">Projects</a></dd>
-            <dd><a href="#certifications">Certifications</a></dd>
-            <dd><a href="#experience">Experience</a></dd>
-            <dd><a href="#contact">Contact</a></dd>
-        </dl>
+    <header style="padding-left: 80px; padding-right: 80px; display: flex; justify-content: space-between; align-items: center;">
+       <h1 id="headerName">Aavula Tejaswi</h1>
+       <div style="display: flex; align-items: center; gap: 20px;">
+           <dl style="margin: 0;">
+               <dd><a href="#home">Home</a></dd>
+               <dd><a href="#about">About</a></dd>
+               <dd><a href="#skills">Skills</a></dd>
+               <dd><a href="#education">Education</a></dd>
+               <dd><a href="#projects">Projects</a></dd>
+               <dd><a href="#certifications">Certifications</a></dd>
+               <dd><a href="#experience">Experience</a></dd>
+               <dd><a href="#contact">Contact</a></dd>
+           </dl>
+           <button id="themeToggle" style="background: transparent; border: none; color: var(--link-color); cursor: pointer; font-size: 1.3rem; padding: 5px 10px; display: flex; align-items: center;" aria-label="Toggle Theme">
+               <i id="themeIcon" class="fa-solid fa-moon"></i>
+           </button>
+       </div>
     </header>
   <main>
       <section id="home">
-        <div id="summary">
+        <div id="summary" data-aos="fade-up">
         <div style="flex-basis:50%; flex-grow: 0.5">
             <p>Hello, I'm</p>
-            <h1>Aavula Tejaswi</h1>
-            <p>Data Science Specialist | Full-Stack Developer</p>
-            <p>
+            <h1 id="homeName">Aavula Tejaswi</h1>
+            <p id="homeTitle">Data Science Specialist | Full-Stack Developer</p>
+            <p id="homeSummary">
                 Tejaswi is a dedicated Computer Science fresher specializing in Data Science, eager to apply foundational knowledge in a professional and growth-oriented environment. Strong skills in Python programming and web technologies like React.js and Node.js, along with basic knowledge of DevOps and AI/ML. Committed to continuous learning, improving skills, and contributing effectively to create real value for the organization.
             </p>
-           <a href="./Tejaswi-resume.pdf" download><button class="button-radius">Download Resume</button></a>
+           <a id="resumeLink" href="./Tejaswi-resume.pdf" download><button class="button-radius">Download Resume</button></a>
            <a href="#projects"><button class="button-radius">View my work</button></a>
            <a href="#contact"><button class="button-radius">Get in touch</button></a>
         </div>     
@@ -44,7 +51,7 @@
         <section class="why-hire">
     <h1>Why Hire Me?</h1>
 
-    <div class="why-cards">
+    <div class="why-cards" id="whyHireContainer">
         <div class="why-card">
             <h2>Data Science</h2>
             <p>Strong foundation in Python, EDA, ML, and Power BI.</p>
@@ -64,11 +71,13 @@
         <h1>About Me</h1>
         <p>Get to know me better</p>
         <h2>Professional Journey</h2>
-        <p>
-        A dedicated Computer Science graduate with a strong foundation in Data Science, AI/ML, and full-stack development. Passionate about leveraging data to drive insights and build impactful solutions. Experienced in Python, React.js, Node.js, and various data analysis tools.
-        </p>
-        <p>Currently pursuing opportunities to apply technical skills in a professional environment while continuously expanding expertise in emerging technologies.</p>
-    <div class="stats-container">
+        <div id="aboutMeContainer">
+            <p>
+            A dedicated Computer Science graduate with a strong foundation in Data Science, AI/ML, and full-stack development. Passionate about leveraging data to drive insights and build impactful solutions. Experienced in Python, React.js, Node.js, and various data analysis tools.
+            </p>
+            <p>Currently pursuing opportunities to apply technical skills in a professional environment while continuously expanding expertise in emerging technologies.</p>
+        </div>
+    <div class="stats-container" id="statsContainer">
     <div class="stat-card">
         <h1>B.Tech</h1>
         <p>Computer Science</p>
@@ -88,7 +97,7 @@
     <section id="skills" class="skill">
         <h1>Technical Skills</h1>
         <h3>Technologies I work with</h3>
-        <div class="flex"> 
+        <div class="flex" id="skillsContainer"> 
             <div class="div">
             <h2>Programming Languages</h2>
          <button class="button-radius">Python</button>
@@ -127,7 +136,7 @@
     <section id="education" class="about">
         <h1>Education</h1>
         <h3>Academic Background</h3>
-        <div class="flex">
+        <div class="flex" id="educationContainer">
             <div class="project">
              <h2>DRK Institute of Science and Technology</h2>
              <p>B. Tech in Computer Science</p>
@@ -151,7 +160,7 @@
     <section id="projects" class="about">
         <h1>Featured Projects</h1>
         <h3>Some of my recent work</h3>
-        <div class="flex">
+        <div class="flex" id="projectsContainer">
             <div class="project">
              <h2>Predicting Employee Attrition</h2>
              <p>Major Project | April 2025 - July 2025</p>
@@ -192,7 +201,7 @@
     <section id="certifications" class="about">
         <h1>Certifications</h1>
         <h3>Professional certifications and achievements</h3>
-        <div class="flex">
+        <div class="flex" id="certificationsContainer">
             <div class="project">
              <h2>AI&ML Bootcamp</h2>
              <p>ace online | January 2024</p>
@@ -228,7 +237,7 @@
     <section id="experience" class="about">
         <h1>Work Experience</h1>
         <h3>Professional Experience</h3>
-        <div class="flex">
+        <div class="flex" id="experienceContainer">
             <div class="project" style="height: auto;">
              <h2>Data Analytics & Marketing Intern</h2>
              <p>KC Overseas Education | March 2025 - May 2025</p>
@@ -240,7 +249,7 @@
     </section>
     <section id="achievements" class="skill">
         <h1>Achievements & Activities</h1>
-        <div class="flex">
+        <div class="flex" id="achievementsContainer">
             <div class="div">
                 <h2>Hackathons</h2>
                 <p>Data Science & ML Hackathon</p>
@@ -266,7 +275,7 @@
                 <div style="padding-right: 40px; padding-left: 50px;">
                 <h1>Let's Connect</h1>
                 <p>I'm always interested in new opportunities and exciting projects. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
-            <a href="mailto:tejaswi21n6702@gmail.com">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejaswi21n6702@gmail.com" target="_blank">
         <button class="button-radius1">
             <i class="fa-solid fa-envelope"></i> tejaswi21n6702@gmail.com
         </button>
@@ -301,7 +310,7 @@
    <p>© 2025 Aavula Tejaswi. All rights reserved.</p>
 
    <div class="footer-icons">
-      <a href="mailto:tejaswi21n6702@gmail.com" class="icon">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tejaswi21n6702@gmail.com" class="icon" target="_blank">
          <i class="fa-solid fa-envelope"></i>
       </a>
 
@@ -314,28 +323,253 @@
       </a>
    </div>
 </footer>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 <script>
+// Dynamic API Base URL detection. If running locally, it points to localhost:5000.
+// When hosted, you can replace the placeholder URL with your actual deployed backend URL.
+const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+    ? "http://localhost:5000"
+    : "https://your-backend-api-url.onrender.com"; // Replace with your production backend URL
+
+async function loadPortfolio() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/portfolio`);
+        if (!response.ok) return;
+        const data = await response.json();
+        
+        // 1. Home Section
+        if (data.home) {
+            document.getElementById("headerName").textContent = data.home.name;
+            document.getElementById("homeName").textContent = data.home.name;
+            document.getElementById("homeTitle").textContent = data.home.subTitle;
+            document.getElementById("homeSummary").textContent = data.home.summary;
+            if (data.home.profileImage) {
+                document.getElementById("profileImage").src = data.home.profileImage;
+            }
+            if (data.home.resumeLink) {
+                document.getElementById("resumeLink").href = data.home.resumeLink;
+            }
+        }
+        
+        // 2. About Section
+        if (data.about) {
+            // Why Hire
+            const whyHireContainer = document.getElementById("whyHireContainer");
+            if (whyHireContainer && data.about.whyHire) {
+                whyHireContainer.innerHTML = data.about.whyHire.map(item => `
+                    <div class="why-card" data-aos="fade-up">
+                        <h2>${item.title}</h2>
+                        <p>${item.description}</p>
+                    </div>
+                `).join("");
+            }
+            
+            // About Me Text
+            const aboutMeContainer = document.getElementById("aboutMeContainer");
+            if (aboutMeContainer) {
+                aboutMeContainer.innerHTML = `
+                    <p>${data.about.aboutMeText1 || ""}</p>
+                    <p>${data.about.aboutMeText2 || ""}</p>
+                `;
+            }
+            
+            // Stats
+            const statsContainer = document.getElementById("statsContainer");
+            if (statsContainer && data.about.stats) {
+                statsContainer.innerHTML = data.about.stats.map(stat => `
+                    <div class="stat-card" data-aos="fade-up">
+                        <h1>${stat.value}</h1>
+                        <p>${stat.label}</p>
+                    </div>
+                `).join("");
+            }
+        }
+        
+        // 3. Skills Section
+        const skillsContainer = document.getElementById("skillsContainer");
+        if (skillsContainer && data.skills) {
+            skillsContainer.innerHTML = data.skills.map(group => `
+                <div class="div" data-aos="fade-up">
+                    <h2>${group.category}</h2>
+                    ${group.items.map(item => `<button class="button-radius">${item}</button>`).join(" ")}
+                </div>
+            `).join("");
+        }
+        
+        // 4. Education Section
+        const educationContainer = document.getElementById("educationContainer");
+        if (educationContainer && data.education) {
+            educationContainer.innerHTML = data.education.map(edu => `
+                <div class="project" data-aos="fade-up">
+                    <h2>${edu.school}</h2>
+                    <p>${edu.degree}</p>
+                    <p>${edu.grade}</p>
+                    <p>${edu.location}</p>
+                </div>
+            `).join("");
+        }
+        
+        // 5. Projects Section
+        const projectsContainer = document.getElementById("projectsContainer");
+        if (projectsContainer && data.projects) {
+            projectsContainer.innerHTML = data.projects.map(proj => `
+                <div class="project" data-aos="fade-up">
+                    <h2>${proj.title}</h2>
+                    <p>${proj.timeline}</p>
+                    <p>${proj.description}</p>
+                    ${proj.tags.map(tag => `<button class="button-radius">${tag}</button>`).join(" ")}
+                </div>
+            `).join("");
+        }
+        
+        // 6. Certifications Section
+        const certificationsContainer = document.getElementById("certificationsContainer");
+        if (certificationsContainer && data.certifications) {
+            certificationsContainer.innerHTML = data.certifications.map(cert => `
+                <div class="project" data-aos="fade-up">
+                    <h2>${cert.title}</h2>
+                    <p>${cert.issuer} | ${cert.date}</p>
+                    <p>Skills: ${cert.skills}</p>
+                </div>
+            `).join("");
+        }
+        
+        // 7. Experience Section
+        const experienceContainer = document.getElementById("experienceContainer");
+        if (experienceContainer && data.experience) {
+            experienceContainer.innerHTML = data.experience.map(exp => `
+                <div class="project" data-aos="fade-up" style="height: auto;">
+                    <h2>${exp.title}</h2>
+                    <p>${exp.company} | ${exp.timeline}</p>
+                    <p>${exp.description}</p>
+                    ${exp.tags.map(tag => `<button class="button-radius">${tag}</button>`).join(" ")}
+                </div>
+            `).join("");
+        }
+        
+        // 8. Achievements Section
+        const achievementsContainer = document.getElementById("achievementsContainer");
+        if (achievementsContainer && data.achievements) {
+            achievementsContainer.innerHTML = data.achievements.map(ach => `
+                <div class="div" data-aos="fade-up">
+                    <h2>${ach.category}</h2>
+                    ${ach.items.map(item => `<p>${item}</p>`).join("")}
+                </div>
+            `).join("");
+        }
+
+        // Initialize AOS animations on dynamically loaded cards
+        if (typeof AOS !== "undefined") {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+        }
+        
+    } catch (err) {
+        console.error("Failed to load portfolio:", err);
+    }
+}
+
+let recaptchaSiteKey = null;
+
+async function initReCaptcha() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/contact/config`);
+        if (!response.ok) return;
+        const config = await response.json();
+        if (config.recaptchaSiteKey && config.recaptchaSiteKey !== "YOUR_RECAPTCHA_SITE_KEY") {
+            recaptchaSiteKey = config.recaptchaSiteKey;
+            const script = document.createElement("script");
+            script.src = `https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`;
+            document.head.appendChild(script);
+        }
+    } catch (err) {
+        console.warn("reCAPTCHA config fetch failed:", err);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadPortfolio();
+    initReCaptcha();
+});
+
 document.getElementById("contactForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    const formData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        subject: document.getElementById("subject").value,
-        message: document.getElementById("message").value
-    };
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
 
-    const response = await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-    });
+    try {
+        const formData = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            subject: document.getElementById("subject").value,
+            message: document.getElementById("message").value,
+            recaptchaToken: null
+        };
 
-    const data = await response.json();
-    alert(data.message);
+        if (recaptchaSiteKey && typeof grecaptcha !== "undefined") {
+            try {
+                const token = await new Promise((resolve, reject) => {
+                    grecaptcha.ready(() => {
+                        grecaptcha.execute(recaptchaSiteKey, { action: 'submit' })
+                            .then(resolve)
+                            .catch(reject);
+                    });
+                });
+                formData.recaptchaToken = token;
+            } catch (err) {
+                console.error("reCAPTCHA generation failed:", err);
+            }
+        }
+
+        const response = await fetch(`${API_BASE_URL}/contact`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+        alert(data.message);
+        if (response.ok) {
+            document.getElementById("contactForm").reset();
+        }
+    } catch (err) {
+        console.error("Submit Error:", err);
+        alert("An error occurred. Please try again later.");
+    } finally {
+        if (submitBtn) submitBtn.disabled = false;
+    }
 });
+
+// Theme toggle logic
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.getElementById("themeIcon");
+
+const savedTheme = localStorage.getItem("theme") || "dark";
+if (savedTheme === "light") {
+    document.body.classList.add("light-mode");
+    if (themeIcon) themeIcon.classList.replace("fa-moon", "fa-sun");
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+        const isLight = document.body.classList.contains("light-mode");
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        if (themeIcon) {
+            if (isLight) {
+                themeIcon.classList.replace("fa-moon", "fa-sun");
+            } else {
+                themeIcon.classList.replace("fa-sun", "fa-moon");
+            }
+        }
+    });
+}
 </script>
 </body>
 </html>

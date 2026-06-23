@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Dashboard</title>
+    <link rel="icon" type="image/png" href="./portfolio favicon image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 30, 49, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
+
+        header {
+            background-color: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .view-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-muted);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 40px auto;
+            flex-grow: 1;
+            display: flex;
+            gap: 30px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px 10px;
+            height: fit-content;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--text-main);
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .nav-item.active {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Content Area */
+        .main-content {
+            flex-grow: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(8px);
+            position: relative;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            color: #60a5fa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Forms styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* JSON Textareas */
+        .json-editor {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            background: #060913;
+            min-height: 350px !important;
+            color: #34d399;
+            line-height: 1.5;
+        }
+
+        .editor-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 5px;
+            display: block;
+        }
+
+        /* Save Button Float */
+        .actions-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            background: var(--success-color);
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.error {
+            background: var(--error-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-gauge-high"></i> Portfolio Content Manager</h1>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="./index.html" target="_blank" class="view-btn">
+                <i class="fa-solid fa-eye"></i> View Live Site
+            </a>
+            <button onclick="logout()" class="view-btn" style="border-color: var(--error-color); color: var(--error-color); background: transparent; cursor: pointer;">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="nav-item active" onclick="switchTab('home-tab', this)">
+                <i class="fa-solid fa-house"></i> Home Section
+            </div>
+            <div class="nav-item" onclick="switchTab('about-tab', this)">
+                <i class="fa-solid fa-user"></i> About Section
+            </div>
+            <div class="nav-item" onclick="switchTab('skills-tab', this)">
+                <i class="fa-solid fa-brain"></i> Skills
+            </div>
+            <div class="nav-item" onclick="switchTab('education-tab', this)">
+                <i class="fa-solid fa-graduation-cap"></i> Education
+            </div>
+            <div class="nav-item" onclick="switchTab('projects-tab', this)">
+                <i class="fa-solid fa-folder-open"></i> Projects
+            </div>
+            <div class="nav-item" onclick="switchTab('certifications-tab', this)">
+                <i class="fa-solid fa-certificate"></i> Certifications
+            </div>
+            <div class="nav-item" onclick="switchTab('experience-tab', this)">
+                <i class="fa-solid fa-briefcase"></i> Experience
+            </div>
+            <div class="nav-item" onclick="switchTab('achievements-tab', this)">
+                <i class="fa-solid fa-trophy"></i> Achievements
+            </div>
+        </div>
+
+        <!-- Main Form Content -->
+        <div class="main-content">
+            <form id="portfolioForm">
+                
+                <!-- Home Tab -->
+                <div id="home-tab" class="tab-content active">
+                    <h2><i class="fa-solid fa-house"></i> Edit Home Section</h2>
+                    <div class="form-group">
+                        <label for="home-name">Full Name</label>
+                        <input type="text" id="home-name" class="form-control" placeholder="Aavula Tejaswi">
+                    </div>
+                    <div class="form-group">
+                        <label for="home-subTitle">Sub-title / Role</label>
+                        <input type="text" id="home-subTitle" class="form-control" placeholder="Data Science Specialist | Full-Stack Developer">
+                    </div>
+                    <div class="form-group">
+                        <label for="home-summary">Intro Summary</label>
+                        <textarea id="home-summary" class="form-control" placeholder="Brief summary about yourself..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="home-profileImage">Profile Image Path</label>
+                        <input type="text" id="home-profileImage" class="form-control" placeholder="./teju.png">
+                    </div>
+                    <div class="form-group">
+                        <label for="home-resumeLink">Resume PDF Link</label>
+                        <input type="text" id="home-resumeLink" class="form-control" placeholder="./Tejaswi-resume.pdf">
+                    </div>
+                    <div class="form-group" style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed var(--border-color);">
+                        <label for="home-profileFile">Upload Profile Picture (Overwrites teju.png)</label>
+                        <input type="file" id="home-profileFile" class="form-control" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="home-resumeFile">Upload Resume PDF (Overwrites Tejaswi-resume.pdf)</label>
+                        <input type="file" id="home-resumeFile" class="form-control" accept=".pdf">
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div id="about-tab" class="tab-content">
+                    <h2><i class="fa-solid fa-user"></i> Edit About Section</h2>
+                    <div class="form-group">
+                        <label for="about-text1">About Me Paragraph 1</label>
+                        <textarea id="about-text1" class="form-control" placeholder="Professional journey description..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="about-text2">About Me Paragraph 2</label>
+                        <textarea id="about-text2" class="form-control" placeholder="Current plans or objectives..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="about-whyHire">Why Hire Me (JSON Array)</label>
+                        <textarea id="about-whyHire" class="form-control json-editor"></textarea>
+                        <span class="editor-hint">Must be a valid JSON array of objects. Example: <code>[{"title": "Title", "description": "Text"}]</code></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="about-stats">Stats Cards (JSON Array)</label>
+                        <textarea id="about-stats" class="form-control json-editor" style="min-height: 150px !important;"></textarea>
+                        <span class="editor-hint">Must be a valid JSON array of objects. Example: <code>[{"value": "B.Tech", "label": "Computer Science"}]</code></span>
+                    </div>
+                </div>
+
+                <!-- Skills Tab -->
+                <div id="skills-tab" class="tab-content">
+                    <h2><i class="fa-solid fa-brain"></i> Edit Technical Skills</h2>
+                    <div class="form-group">
+                        <label for="skills-data">Skills Categories (JSON Array)</label>
+                        <textarea id="skills-data" class="form-control json-editor"></textarea>
+                        <span class="editor-hint">Example: <code>[{"category": "Programming Languages", "items": ["Python", "JavaScript"]}]</code></span>
+                    </div>
+                </div>
+
+                <!-- Education Tab -->
+                <div id="education-tab" class="tab-content">
+                    <h2><i class="fa-solid fa-graduation-cap"></i> Edit Education Section</h2>
+                    <div class="form-group">
+                        <label for="education-data">Education History (JSON Array)</label>
+                        <textarea id="education-data" class="form-control json-editor"></textarea>
+                        <span class="editor-hint">Example: <code>[{"school": "University", "degree": "Degree", "grade": "GPA", "timeline": "2021-2025", "location": "City"}]</code></span>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div id="projects-tab" class="tab-content">
+                    <h2><i class="fa-solid fa-folder-open"></i> Edit Featured Projects</h2>
+                    <div class="form-group">
+                        <label for="projects-data">Projects List (JSON Array)</label>
+                        <textarea id="projects-data" class="form-control json-editor"></textarea>
+                        <span class="editor-hint">Example: <code>[{"title": "Project Name", "timeline": "Date", "description": "Details", "tags": ["React", "CSS"]}]</code></span>
+                    </div>
+                </div>
+
+                <!-- Certifications Tab -->
+                <div id="certifications-tab" class="tab-content">
+                    <h2><i class="fa-solid fa-certificate"></i> Edit Certifications</h2>
+                    <div class="form-group">
+                        <label for="certifications-data">Certifications List (JSON Array)</label>
+                        <textarea id="certifications-data" class="form-control json-editor"></textarea>
+                        <span class="editor-hint">Example: <code>[{"title": "Cert Title", "issuer": "Vendor", "date": "Date", "skills": "Excel, Power BI"}]</code></span>
+                    </div>
+                </div>
+
+                <!-- Experience Tab -->
+                <div id="experience-tab" class="tab-content">
+                    <h2><i class="fa-solid fa-briefcase"></i> Edit Work Experience</h2>
+                    <div class="form-group">
+                        <label for="experience-data">Experience List (JSON Array)</label>
+                        <textarea id="experience-data" class="form-control json-editor"></textarea>
+                        <span class="editor-hint">Example: <code>[{"title": "Role", "company": "Company", "timeline": "Date", "description": "Details", "tags": ["Data"]}]</code></span>
+                    </div>
+                </div>
+
+                <!-- Achievements Tab -->
+                <div id="achievements-tab" class="tab-content">
+                    <h2><i class="fa-solid fa-trophy"></i> Edit Achievements & Activities</h2>
+                    <div class="form-group">
+                        <label for="achievements-data">Achievements (JSON Array)</label>
+                        <textarea id="achievements-data" class="form-control json-editor"></textarea>
+                        <span class="editor-hint">Example: <code>[{"category": "Hackathons", "items": ["Detail 1", "Detail 2"]}]</code></span>
+                    </div>
+                </div>
+
+                <div class="actions-footer">
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Portfolio Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> Changes saved successfully!</div>
+
+    <script>
+        // Check if admin is logged in
+        const token = localStorage.getItem("adminToken");
+        if (!token) {
+            window.location.href = "login.html";
+        }
+
+        function logout() {
+            localStorage.removeItem("adminToken");
+            window.location.href = "login.html";
+        }
+
+        // Dynamic API Base URL detection. If running locally, it points to localhost:5000.
+        // When hosted, you can replace the placeholder URL with your actual deployed backend URL.
+        const API_BASE_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+            ? "http://localhost:5000"
+            : "https://your-backend-api-url.onrender.com"; // Replace with your production backend URL
+
+        let currentPortfolioData = {};
+
+        // Switch Active Tabs
+        function switchTab(tabId, element) {
+            // Remove active classes
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            
+            // Add active classes
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // Fetch Portfolio Data to populate fields
+        async function fetchPortfolio() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/portfolio`);
+                if (!response.ok) {
+                    showToast("Failed to fetch database content! Run seed.js script.", true);
+                    return;
+                }
+                const data = await response.json();
+                currentPortfolioData = data;
+
+                // Home
+                if (data.home) {
+                    document.getElementById('home-name').value = data.home.name || '';
+                    document.getElementById('home-subTitle').value = data.home.subTitle || '';
+                    document.getElementById('home-summary').value = data.home.summary || '';
+                    document.getElementById('home-profileImage').value = data.home.profileImage || '';
+                    document.getElementById('home-resumeLink').value = data.home.resumeLink || '';
+                }
+
+                // About
+                if (data.about) {
+                    document.getElementById('about-text1').value = data.about.aboutMeText1 || '';
+                    document.getElementById('about-text2').value = data.about.aboutMeText2 || '';
+                    document.getElementById('about-whyHire').value = JSON.stringify(data.about.whyHire || [], null, 2);
+                    document.getElementById('about-stats').value = JSON.stringify(data.about.stats || [], null, 2);
+                }
+
+                // Arrays sections
+                document.getElementById('skills-data').value = JSON.stringify(data.skills || [], null, 2);
+                document.getElementById('education-data').value = JSON.stringify(data.education || [], null, 2);
+                document.getElementById('projects-data').value = JSON.stringify(data.projects || [], null, 2);
+                document.getElementById('certifications-data').value = JSON.stringify(data.certifications || [], null, 2);
+                document.getElementById('experience-data').value = JSON.stringify(data.experience || [], null, 2);
+                document.getElementById('achievements-data').value = JSON.stringify(data.achievements || [], null, 2);
+
+            } catch (err) {
+                console.error(err);
+                showToast("Error connecting to backend database server!", true);
+            }
+        }
+
+        // Handle Form Submission
+        document.getElementById('portfolioForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            try {
+                // Upload files first if selected
+                const profileFile = document.getElementById('home-profileFile').files[0];
+                const resumeFile = document.getElementById('home-resumeFile').files[0];
+                if (profileFile || resumeFile) {
+                    const formData = new FormData();
+                    if (profileFile) formData.append('profile', profileFile);
+                    if (resumeFile) formData.append('resume', resumeFile);
+
+                    showToast("Uploading media files... 📁");
+                    const uploadResponse = await fetch(`${API_BASE_URL}/upload/media`, {
+                        method: "POST",
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        },
+                        body: formData
+                    });
+
+                    if (!uploadResponse.ok) {
+                        const errData = await uploadResponse.json();
+                        throw new Error(errData.error || "File upload failed on the server");
+                    }
+                    
+                    // Update paths
+                    if (profileFile) {
+                        document.getElementById('home-profileImage').value = "./teju.png";
+                    }
+                    if (resumeFile) {
+                        document.getElementById('home-resumeLink').value = "./Tejaswi-resume.pdf";
+                    }
+                }
+
+                // Parse and validate JSON fields before sending
+                const payload = {
+                    home: {
+                        name: document.getElementById('home-name').value,
+                        subTitle: document.getElementById('home-subTitle').value,
+                        summary: document.getElementById('home-summary').value,
+                        profileImage: document.getElementById('home-profileImage').value,
+                        resumeLink: document.getElementById('home-resumeLink').value
+                    },
+                    about: {
+                        aboutMeText1: document.getElementById('about-text1').value,
+                        aboutMeText2: document.getElementById('about-text2').value,
+                        whyHire: JSON.parse(document.getElementById('about-whyHire').value),
+                        stats: JSON.parse(document.getElementById('about-stats').value)
+                    },
+                    skills: JSON.parse(document.getElementById('skills-data').value),
+                    education: JSON.parse(document.getElementById('education-data').value),
+                    projects: JSON.parse(document.getElementById('projects-data').value),
+                    certifications: JSON.parse(document.getElementById('certifications-data').value),
+                    experience: JSON.parse(document.getElementById('experience-data').value),
+                    achievements: JSON.parse(document.getElementById('achievements-data').value)
+                };
+
+                const response = await fetch(`${API_BASE_URL}/portfolio`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.status === 401) {
+                    showToast("Session expired! Redirecting to login...", true);
+                    setTimeout(() => {
+                        logout();
+                    }, 2000);
+                    return;
+                }
+
+                if (!response.ok) throw new Error("Update failed on the server");
+
+                const result = await response.json();
+                showToast("Portfolio changes successfully saved and live! 🚀");
+            } catch (err) {
+                console.error(err);
+                showToast("Invalid JSON syntax! Please check formatting of arrays.", true);
+            }
+        });
+
+        // Show Toast Notification
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            
+            if (isError) {
+                toast.classList.add('error');
+            } else {
+                toast.classList.remove('error');
+            }
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', fetchPortfolio);
+    </script>
+</body>
+</html>

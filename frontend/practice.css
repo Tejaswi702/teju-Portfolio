@@ -1,3 +1,37 @@
+:root {
+  --bg-gradient-1: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  --bg-gradient-2: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --bg-gradient-3: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+  --header-bg: #1a1a2e;
+  --header-text: white;
+  --text-color: white;
+  --link-color: white;
+  --card-text: #1a1a2e;
+  --input-bg: rgba(255, 255, 255, 0.1);
+  --input-text: white;
+  --input-border: #64ffda;
+  --message-bg: rgba(255, 255, 255, 0.05);
+  --message-border: rgba(100, 255, 218, 0.3);
+  --nav-hover: #64ffda;
+}
+
+body.light-mode {
+  --bg-gradient-1: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+  --bg-gradient-2: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+  --bg-gradient-3: linear-gradient(135deg, #e5e7eb 0%, #ffffff 100%);
+  --header-bg: #ffffff;
+  --header-text: #1f2937;
+  --text-color: #1f2937;
+  --link-color: #1f2937;
+  --card-text: #111827;
+  --input-bg: #ffffff;
+  --input-text: #1f2937;
+  --input-border: #00b4d8;
+  --message-bg: #ffffff;
+  --message-border: rgba(0, 180, 216, 0.3);
+  --nav-hover: #00b4d8;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -20,8 +54,8 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1a1a2e;
-  color: white;
+  background-color: var(--header-bg);
+  color: var(--header-text);
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -30,16 +64,16 @@ dl{
   display:flex;
   flex-direction:row;
   justify-content:space-evenly;
-  color: black;
-  background-color: #1a1a2e;
+  color: var(--link-color);
+  background-color: var(--header-bg);
 }  
 a {
   text-decoration: none;
-  color: white;
+  color: var(--link-color);
   transition: color 0.3s ease;
 }
 a:hover {
-  color: #64ffda;
+  color: var(--nav-hover);
 }
 #summary1{
   background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
@@ -55,8 +89,8 @@ a:hover {
   min-height: 90vh;
   padding: 60px 100px;
   gap: 60px;
-  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
-  color: white;
+  background: var(--bg-gradient-1);
+  color: var(--text-color);
   flex-wrap: wrap;
   font-size: 20px;
 }
@@ -90,8 +124,8 @@ a:hover {
   transform: translateY(-2px);
 }
 .about{
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    color: white;
+    background: var(--bg-gradient-2);
+    color: var(--text-color);
     display: flex;  
     flex-direction: column;
     text-align: center;
@@ -105,8 +139,8 @@ section{
 .why-hire{
   text-align: center;
   padding: 80px 40px;
-  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
-  color: white;
+  background: var(--bg-gradient-1);
+  color: var(--text-color);
   margin: 0;
 }
 .why-cards{
@@ -185,8 +219,8 @@ section{
   gap: 30px;
 }
 .skill{
-  background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
-  color: white;
+  background: var(--bg-gradient-3);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   text-align: center; 
@@ -254,9 +288,9 @@ section{
 }
 .button-radius2{
     border-radius: 10px ;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid #64ffda;
-    color: white;
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    color: var(--input-text);
     width: 100%;
     max-width: 300px;
     height: 50px;
@@ -278,18 +312,18 @@ section{
    align-items: center;
    margin-bottom: 30px;
    border-radius: 20px;
-   background: rgba(255, 255, 255, 0.05);
+   background: var(--message-bg);
    backdrop-filter: blur(10px);
-   border: 2px solid rgba(100, 255, 218, 0.3);
-   color: white;
+   border: 2px solid var(--message-border);
+   color: var(--text-color);
    width: 100%;
    max-width: 350px;
    min-height: 400px;
    padding: 20px;
 }
 .footer {
-  background: #1a1a2e;
-  color: white;
+  background: var(--header-bg);
+  color: var(--text-color);
   display: flex;
   justify-content: space-between;
   align-items: center;

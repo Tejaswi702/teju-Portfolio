@@ -1,0 +1,18 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories (these are downloaded automatically with npm install)
+node_modules/
+backend/node_modules/
+
+# Environment variables (keeps your secret keys private)
+.env
+backend/.env
+frontend/.env
+*.env
+
+# Operating System files
+.DS_Store
+Thumbs.db
