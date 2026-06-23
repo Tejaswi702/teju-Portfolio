@@ -447,12 +447,12 @@
         // Check if admin is logged in
         const token = localStorage.getItem("adminToken");
         if (!token) {
-            window.location.href = "login.html";
+            window.location.href = "secret-login.html";
         }
 
         function logout() {
             localStorage.removeItem("adminToken");
-            window.location.href = "login.html";
+            window.location.href = "secret-login.html";
         }
 
         // Dynamic API Base URL detection. If running locally, it points to localhost:5000.
