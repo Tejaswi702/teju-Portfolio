@@ -334,7 +334,10 @@ const API_BASE_URL = window.location.hostname === "localhost" || window.location
 async function loadPortfolio() {
     try {
         const response = await fetch(`${API_BASE_URL}/portfolio`);
-        if (!response.ok) return;
+        if (!response.ok) {
+            console.warn("Backend portfolio data could not be fetched. Using static fallback content.");
+            return;
+        }
         const data = await response.json();
         
         // 1. Home Section
@@ -458,13 +461,9 @@ async function loadPortfolio() {
             `).join("");
         }
 
-        // Initialize AOS animations on dynamically loaded cards
+        // Refresh AOS animations on dynamically loaded cards
         if (typeof AOS !== "undefined") {
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true
-            });
+            AOS.refresh();
         }
         
     } catch (err) {
@@ -491,6 +490,14 @@ async function initReCaptcha() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Initialize AOS immediately so hardcoded fallback content is animated and visible right away
+    if (typeof AOS !== "undefined") {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    }
     loadPortfolio();
     initReCaptcha();
 });

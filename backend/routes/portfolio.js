@@ -23,9 +23,13 @@ const requireAuth = (req, res, next) => {
 // Get portfolio data
 router.get("/", async (req, res) => {
   try {
-    const portfolio = await Portfolio.findOne();
+    let portfolio = await Portfolio.findOne();
     if (!portfolio) {
-      return res.status(404).json({ message: "Portfolio not found. Run seed script first." });
+      console.log("No portfolio document found. Auto-seeding default data... 📁");
+      const defaultData = require("../config/defaultData");
+      portfolio = new Portfolio(defaultData);
+      await portfolio.save();
+      console.log("Portfolio auto-seeded successfully! ✅");
     }
     res.json(portfolio);
   } catch (error) {
